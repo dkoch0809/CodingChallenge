@@ -65,8 +65,6 @@ public class Edge {
 		return weight;
 	}
 
-	
-
 	public Places getSourcebyD(ArrayList<Edge> list, Places sor) {
 		Places k = null;
 		for (Edge edge : list) {

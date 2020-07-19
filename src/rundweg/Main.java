@@ -40,7 +40,6 @@ public class Main {
 		Map2DRenderer render2D = new Map2DRenderer(reachedPlaces, path);
 		frame.add(render2D);
 		frame.setVisible(true);
-		render2D.setParamWorld2Screen(-1, -1, 10);
 		render2D.repaint();
 
 	}
@@ -100,14 +99,14 @@ public class Main {
 
 	public static ArrayList<Edge> simulatingAnnealing(ArrayList<Edge> ein, ArrayList<Places> reach,
 			ArrayList<Edge> tab) {
-		//"Anfangstemperatur"
+		// "Anfangstemperatur"
 		double temp = 100000;
 		int k = 0;
 		// "Cooling rate"
 		double coolingRate = 0.00003;
 
 		ArrayList<Integer> swappedSolution = new ArrayList<>();
-		
+
 		ArrayList<Edge> currentSolution = new ArrayList<>(ein);
 		ArrayList<Places> currentOrder = new ArrayList<>(reach);
 
@@ -116,11 +115,11 @@ public class Main {
 
 		System.out.println("Initial solution distance: " + discurrent);
 
-		//Initialisierung der Lösung
+		// Initialisierung der Lösung
 		ArrayList<Edge> bestSol = new ArrayList<>(currentSolution);
 		ArrayList<Places> bestOrder = new ArrayList<>(currentOrder);
 
-		//Einschränkung der wählbaren Wege
+		// Einschränkung der wählbaren Wege
 		ArrayList<Edge> good = new ArrayList<Edge>();
 		ArrayList<Edge> bad = new ArrayList<Edge>();
 
@@ -131,21 +130,20 @@ public class Main {
 				bad.add(tab.get(i));
 			}
 		}
-		
-		
+
 		int durchläufe = 0;
 
 		// Algorithmus läuft bis "Temperatur" runter gekühlt ist
 		while (temp > 1) {
 
 			durchläufe++;
-			
+
 			ArrayList<Edge> newSolution = new ArrayList<Edge>();
 			ArrayList<Places> newOrder = new ArrayList<Places>();
-			
+
 			newOrder.addAll(currentOrder);
-			
-			//2 Standorte der aktuellen Tour zufällig tauschen
+
+			// 2 Standorte der aktuellen Tour zufällig tauschen
 			int tourPos1 = (int) (newOrder.size() * Math.random());
 			int tourPos2 = (int) (newOrder.size() * Math.random());
 
@@ -154,10 +152,10 @@ public class Main {
 			int badSwap = Integer.parseInt(citySwap1.getId() + "" + citySwap2.getId());
 
 			double wei = getWeight(newOrder.get(tourPos1), newOrder.get(tourPos2));
-			//Testen ob der zufällige Tausch sinnvoll ist 
+			// Testen ob der zufällige Tausch sinnvoll ist, 
 			while (tourPos1 == tourPos2 || (tourPos1 == 0 || tourPos2 == 0) || bad.get(0).getWeight() < wei
 					|| swappedSolution.contains(badSwap)) {
-				
+
 				tourPos1 = (int) (newOrder.size() * Math.random());
 				tourPos2 = (int) (newOrder.size() * Math.random());
 
@@ -166,13 +164,13 @@ public class Main {
 				citySwap1 = newOrder.get(tourPos1);
 				citySwap2 = newOrder.get(tourPos2);
 				badSwap = Integer.parseInt(citySwap1.getId() + "" + citySwap2.getId());
-				
+				swappedSolution.add(badSwap);
 				if (swappedSolution.size() > 50) {
 					break;
 				}
 			}
 
-			// Get the cities at selected positions in the tour
+			
 			citySwap1 = newOrder.get(tourPos1);
 			citySwap2 = newOrder.get(tourPos2);
 
@@ -182,6 +180,7 @@ public class Main {
 			newOrder.set(tourPos2, citySwap1);
 			newOrder.set(tourPos1, citySwap2);
 
+			//Berechnung der neuen Tour
 			for (int i = 0; i < newOrder.size(); i++) {
 				int n = 1;
 				if (i == newOrder.size() - 1) {
@@ -197,14 +196,15 @@ public class Main {
 			double neighbourEnergy = calcDistance(newSolution);
 
 			double rand = randomDouble();
-			//Falls die neue Lösung kürzer ist, wird diese genutzt  
+			// Falls die neue Lösung kürzer ist, wird diese genutzt
 			if (neighbourEnergy < currentEnergy) {
 				currentSolution = new ArrayList<>(newSolution);
 				currentOrder = new ArrayList<>(newOrder);
 				discurrent = calcDistance(currentSolution);
 				swappedSolution.removeAll(swappedSolution);
-			
-			//Ist die neue Lösung nicht besser wird über eiine Wahrscheinlichkeit berechnet, ob diese trotzdem genutzt wird
+
+				// Ist die neue Lösung nicht besser wird über eiine Wahrscheinlichkeit
+				// berechnet, ob diese trotzdem genutzt wird
 			} else if (acceptanceProbability(currentEnergy, neighbourEnergy, temp) > rand) {
 				currentSolution = new ArrayList<>(newSolution);
 				currentOrder = new ArrayList<>(newOrder);

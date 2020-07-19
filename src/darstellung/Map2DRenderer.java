@@ -15,10 +15,7 @@ import javax.swing.JPanel;
 import rundweg.*;
 
 public class Map2DRenderer extends JPanel {
-	/**
-	 * 
-	 */
-//	private static final long serialVersionUID = 1L;
+
 
 	ArrayList<Places> place;
 	ArrayList<Edge> path;
@@ -27,11 +24,6 @@ public class Map2DRenderer extends JPanel {
 	public Map2DRenderer(ArrayList<Places> place, ArrayList<Edge> path) {
 		this.place = place;
 		this.path = path;
-	}
-
-
-	public void setParamWorld2Screen(double dx, double dy, double scale) {
-		repaint();
 	}
 
 
