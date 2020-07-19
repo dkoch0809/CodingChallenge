@@ -1,10 +1,10 @@
 Importieren des Projektes in die Entwicklungsumgebung Eclipse, Intellj, Netbeans und dann Projekt starten
 
 Verwendetere Algorithmus: 1. NerarestNeigbor: einfache Implementierung für eine akzeptable 1, Lösung
-			  2. Anlehnung an Simulating Annealing: Schnelle und Einfache Implementierung, Lokale Minima können überschritten werden für eine bessere Lösung
+			  2. Anlehnung an Simulating Annealing: schnelle und einfache Implementierung, lokale Minima können überschritten werden für eine bessere Lösung
 
 
-Beste gefundene Lösung: 2360KM 
+Beste gefundene Lösung: ca. 2360KM 
 Ismaning-> Ingolstadt -> Nürnberg -> Stuttgart -> St. Georgen -> Bretten -> Walldorf -> Frankfurt -> Hürth -> Düsseldorf -> Essen -> Münster -> Lingen 
 -> Schortens -> Hamburg -> Hannover -> Braunschweig -> Berlin -> Görlitz -> Chemnitz -> Passau -> Ismaning
 
